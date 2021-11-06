@@ -65,12 +65,18 @@ def recogn_pdf(file_name, dpi = 300):
     return extractor.output_fname
 
 
-def recognizer(f_name):
+def recognizer(f_name: str, dpi: int):
     format = f_name.split('.')[-1]
     if format == 'pdf':
-        recogn_pdf(f_name)
+        if dpi:
+            recogn_pdf(f_name,dpi)
+        else:
+            recogn_pdf(f_name)
     elif format == 'docx':
         recogn_doc(f_name)
     elif format in ALLOWED_EXTENSIONS:
-        recogn_image(f_name)
+        if dpi:
+            recogn_image(f_name,dpi)
+        else:
+            recogn_image(f_name)
 
