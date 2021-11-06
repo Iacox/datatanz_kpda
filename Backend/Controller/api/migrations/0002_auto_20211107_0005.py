@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='rawfile',
             name='dpi',
-            field=models.IntegerField(blank=True, default=None, verbose_name='DPI'),
+            field=models.IntegerField(blank=True, null=True, default=None, verbose_name='DPI'),
         ),
         migrations.AlterField(
             model_name='processedfile',
