@@ -20,7 +20,7 @@ services:
     hostname: rabbit
     build:
       context: rabbitmq
-      dockerfile: rabbitmq/Dockerfile
+      dockerfile: Dockerfile
     networks:
       - main
     ports:
