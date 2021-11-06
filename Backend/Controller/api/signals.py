@@ -16,5 +16,5 @@ def post_save_raw_file(sender, instance, created, **kwargs):
         file_path = str(raw_file.file_object).split('/')[-1]
         file_path = os.path.join(MEDIA_ROOT, 'input_files/' + file_path)
         file_pk = raw_file.pk
-
-        convert_file.delay(file_path,file_pk)
+        file_dpi = raw_file.dpi
+        convert_file.delay(file_path,file_pk,file_dpi)
