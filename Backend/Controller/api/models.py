@@ -1,6 +1,7 @@
 import os
 
 from django.db import models
+from pyasn1.compat.octets import null
 
 
 class ProcessedFile(models.Model):
@@ -13,7 +14,7 @@ class ProcessedFile(models.Model):
 class RawFile(models.Model):
     file_object = models.FileField('File Object',upload_to='input_files')
     status = models.BooleanField('Status', default=False)
-    dpi = models.IntegerField('DPI',default=None, blank = True)
+    dpi = models.IntegerField('DPI',default=None, blank = True, null=True)
     processed_file = models.ForeignKey(ProcessedFile,
                                        verbose_name='processed_file',
                                        null=True,
