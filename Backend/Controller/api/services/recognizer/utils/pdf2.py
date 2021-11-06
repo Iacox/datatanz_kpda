@@ -60,6 +60,8 @@ class PDFExtractor3:
             img_grey = cv2.threshold(img_grey, 25, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
 
             df_page = pytesseract.image_to_data(img_grey, lang='rus', output_type='data.frame')
+            del im
+            del img_grey
             df_page = df_page[df_page['text'].notna()]
             df_page['page_num'] = i
             self.frame = pd.concat([self.frame, df_page])
