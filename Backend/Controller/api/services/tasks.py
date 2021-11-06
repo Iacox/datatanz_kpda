@@ -6,8 +6,8 @@ from .recognizer.recognizer import recognizer
 @celery_app.task(name='api.services.tasks.file_processing',
                  queue='ml_task',
                  routing_key='ml_task')
-def file_processing(file_path: str):
-    return recognizer(file_path)
+def file_processing(file_path: str, dpi: int):
+    return recognizer(file_path, dpi)
 
 
 @celery_app.task(name='api.services.tasks.save_processed_file',
@@ -29,8 +29,8 @@ def change_status(file_pk: int):
 @celery_app.task(name='api.services.tasks.convert_file',
                  queue='default',
                  routing_key='default')
-def convert_file(file_path: str, file_pk:int):
-    (file_processing.s(file_path) | save_processed_file.s(file_pk) | change_status.si(file_pk))().forget()
+def convert_file(file_path: str, file_pk:int, dpi:int or None):
+    (file_processing.s(file_path,dpi) | save_processed_file.s(file_pk) | change_status.si(file_pk))().forget()
 
 
 
