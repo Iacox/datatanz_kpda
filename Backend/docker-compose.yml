@@ -89,7 +89,7 @@ services:
     command: sh -c "\wait-for redis:6379\
       && wait-for rabbit:5672\
       && wait-for web:8000\
-      && celery -A Config worker -E -Q default -P gevent -c 50 -l INFO -n worker1@%h --pidfile= "
+      && celery -A Config worker -E -Q default -P gevent -c 5 -l INFO -n worker1@%h --pidfile= "
     container_name: default_worker
     env_file:
       - Controller/.env.controller
@@ -118,7 +118,7 @@ services:
     command: sh -c "wait-for redis:6379\
       && wait-for rabbit:5672\
       && wait-for web:8000\
-      && celery -A Config worker -E -Q ml_task -P gevent -c 40 -l INFO -n worker2@%h --pidfile= "
+      && celery -A Config worker -E -Q ml_task -P gevent -c 5 -l INFO -n worker2@%h --pidfile= "
     container_name: celery_ml_worker_1
     env_file:
       - Controller/.env.controller
@@ -148,7 +148,7 @@ services:
     command: sh -c "wait-for redis:6379\
       && wait-for rabbit:5672\
       && wait-for web:8000\
-      && celery -A Config worker -E -Q ml_task -P gevent -c 30 -l INFO -n worker3@%h --pidfile= "
+      && celery -A Config worker -E -Q ml_task -P gevent -c 5 -l INFO -n worker3@%h --pidfile= "
     container_name: celery_ml_worker_2
     env_file:
       - Controller/.env.controller
@@ -174,65 +174,65 @@ services:
           memory: 50M
     restart: always
 
-  celery_ml_worker_3:
-    command: sh -c "wait-for redis:6379\
-      && wait-for rabbit:5672\
-      && wait-for web:8000\
-      && celery -A Config worker -E -Q ml_task -P gevent -c 20 -l INFO -n worker4@%h --pidfile= "
-    container_name: celery_ml_worker_3
-    env_file:
-      - Controller/.env.controller
-    hostname: celery_ml_worker_3
-    volumes:
-      - media_volume:/home/app/web/data
-      - ./wait-for:/bin/wait-for
-    image: web-image
-    networks:
-      - main
-    depends_on:
-      - web
-      - redis
-      - rabbit
-      - postgres
-    deploy:
-      restart_policy:
-        condition: on-failure
-      resources:
-        limits:
-          memory: 200M
-        reservations:
-          memory: 50M
-    restart: always
-
-  celery_ml_worker_4:
-    command: sh -c "wait-for redis:6379\
-      && wait-for rabbit:5672\
-      && wait-for web:8000\
-      && celery -A Config worker -E -Q ml_task -P gevent -c 20 -l INFO -n worker4@%h --pidfile= "
-    container_name: celery_ml_worker_4
-    env_file:
-      - Controller/.env.controller
-    hostname: celery_ml_worker_4
-    volumes:
-      - media_volume:/home/app/web/data
-      - ./wait-for:/bin/wait-for
-    image: web-image
-    networks:
-      - main
-    depends_on:
-      - web
-      - redis
-      - rabbit
-      - postgres
-    deploy:
-      restart_policy:
-        condition: on-failure
-      resources:
-        limits:
-          memory: 200M
-        reservations:
-          memory: 50M
-    restart: always
+#  celery_ml_worker_3:
+#    command: sh -c "wait-for redis:6379\
+#      && wait-for rabbit:5672\
+#      && wait-for web:8000\
+#      && celery -A Config worker -E -Q ml_task -P gevent -c 20 -l INFO -n worker4@%h --pidfile= "
+#    container_name: celery_ml_worker_3
+#    env_file:
+#      - Controller/.env.controller
+#    hostname: celery_ml_worker_3
+#    volumes:
+#      - media_volume:/home/app/web/data
+#      - ./wait-for:/bin/wait-for
+#    image: web-image
+#    networks:
+#      - main
+#    depends_on:
+#      - web
+#      - redis
+#      - rabbit
+#      - postgres
+#    deploy:
+#      restart_policy:
+#        condition: on-failure
+#      resources:
+#        limits:
+#          memory: 200M
+#        reservations:
+#          memory: 50M
+#    restart: always
+#
+#  celery_ml_worker_4:
+#    command: sh -c "wait-for redis:6379\
+#      && wait-for rabbit:5672\
+#      && wait-for web:8000\
+#      && celery -A Config worker -E -Q ml_task -P gevent -c 20 -l INFO -n worker4@%h --pidfile= "
+#    container_name: celery_ml_worker_4
+#    env_file:
+#      - Controller/.env.controller
+#    hostname: celery_ml_worker_4
+#    volumes:
+#      - media_volume:/home/app/web/data
+#      - ./wait-for:/bin/wait-for
+#    image: web-image
+#    networks:
+#      - main
+#    depends_on:
+#      - web
+#      - redis
+#      - rabbit
+#      - postgres
+#    deploy:
+#      restart_policy:
+#        condition: on-failure
+#      resources:
+#        limits:
+#          memory: 200M
+#        reservations:
+#          memory: 50M
+#    restart: always
 
   celery_solo_worker:
     command: sh -c "wait-for redis:6379\
