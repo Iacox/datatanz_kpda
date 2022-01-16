@@ -1,18 +1,18 @@
 <template>
-  <v-container class="page_wrapper" fluid fill-height>
+  <v-container class="page_wrapper mt-16 mt-sm-auto" fluid fill-height>
     <v-fade-transition>
       <v-row v-if="dataLoading" class="main_form flex-column">
-        <v-col cols="3" class="mx-auto text-center">
+        <v-col cols="12" md="3" class="mx-auto text-center">
           <v-subheader><span>Пожалуйста, подождите пока закончится обработка</span></v-subheader>
           <v-subheader><span>В среднем занимает около 1 минуты.</span></v-subheader>
         </v-col>
-        <v-col cols="3" class="mx-auto">
+        <v-col cols="12" md="3" class="mx-auto">
           <SpinnerLoader/>
         </v-col>
       </v-row>
       <template v-else>
         <v-row v-if="!job" class="main_form flex-column">
-          <v-col class="mx-auto col-12 col-md-8">
+          <v-col cols="12" md="8" class="mx-auto">
             <v-card class="main_form-block px-10 py-5">
               <v-file-input
                 v-model="files"
@@ -30,7 +30,7 @@
             </v-card>
           </v-col>
 
-          <v-col class="mx-auto col-12 col-md-8 my-md-5">
+          <v-col cols="12" md="8" class="mx-auto my-md-5">
             <v-card class="main_form-block px-10 py-5">
               <v-subheader>Разрешение DPI (влияет на скорость выполнения)</v-subheader>
               <v-slider

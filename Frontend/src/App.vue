@@ -3,24 +3,35 @@
 		<v-app-bar
 			absolute
       prominent
-			class="px-4"
+			class="px-0"
 		>
-			<v-col cols="2" class="my-auto">
-				<!-- <img :src="logo"> -->
-			</v-col>
-			<v-spacer></v-spacer>
+			<v-row dense>
+				<v-col
+					cols="8"
+					sm="2"
+					order="1"
+					class="my-auto"
+				>
+					<img :src="logo">
+				</v-col>
 
-			<div class="d-flex flex-column my-auto">
-				<h1 class="mb-4">Kvirin Personal Data Analise</h1>
-				<h2>Защита персональных данных в документах</h2>
-			</div>
-			<v-spacer></v-spacer>
+				<v-col order="3" order-sm="2" class="d-flex flex-column my-auto mx-auto">
+					<h1 class="mb-4 text-h5 text-sm-h4 text-md-h3 text-lg-h2">Kvirin Personal Data Analise</h1>
+					<h2 class="text-subtitle-1 text-sm-h6 text-md-h5 text-lg-h5">Защита персональных данных в документах</h2>
+				</v-col>
 
-			<v-col cols="2" class="my-auto d-flex">
-				<v-btn @click="ToggleTheme" icon class="ml-auto">
-					<v-icon x-large>{{ $vuetify.theme.isDark ? 'mdi-weather-night' : 'mdi-white-balance-sunny'}}</v-icon>
-				</v-btn>
-			</v-col>
+				<v-col
+					cols="4"
+					sm="2"
+					order="2"
+					order-sm="3"
+					class="my-auto d-flex"
+				>
+					<v-btn @click="ToggleTheme" icon class="ml-auto">
+						<v-icon x-large>{{ $vuetify.theme.isDark ? 'mdi-weather-night' : 'mdi-white-balance-sunny'}}</v-icon>
+					</v-btn>
+				</v-col>
+			</v-row>
 		</v-app-bar>
 
 		<v-main>
